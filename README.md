@@ -9,6 +9,7 @@
 ## Code
 ### Generiek
 - De code is in het Engels geschreven, dit betreft alle variabelen, methodes, klasses, etc. namen en commentaar.
+- Branches en commits zijn geschreven in het Nederlands.
 - De output van de app is Nederlandstalig.
 - Commentaar wordt alleen toegevoegd om uit te leggen _waarom_ code is geschreven zoals het is, _niet_ om uit te leggen wat het doet. (Verwijder dus het commentaar dat AI schrijft!)
 - Gebruik beschrijvende namen, _niet_ str, _maar_ userName.
@@ -36,6 +37,10 @@
     - Order.cs bevat de definitie van de Order-klasse.
     - Product.cs bevat de definitie van de Product-klasse.
     - User.cs bevat de definitie van de User-klasse.
+ - Branches volgend camelCase en worden ingedeeld op de categorie functie of fix, bijv.:
+    - functie/homePaginaToevoegen.
+    - functie/kleurenPaletteToepassen.
+    - fix/inlogWachtwoordBugOplossen.
 ### Code structuur
 - `Models/` Bevat de klassen.
 - `Controllers` Bevat de controllers.
