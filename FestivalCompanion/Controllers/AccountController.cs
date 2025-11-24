@@ -24,6 +24,11 @@ namespace FestivalCompanion.Controllers
             return View();
         }
 
+        public IActionResult Register()
+        {
+            return View();
+        }
+
         // GET: AcountController/Details/5
         public ActionResult Details(int id)
         {
