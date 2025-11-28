@@ -6,7 +6,7 @@ namespace FestivalCompanion.Data
 {
     public class BloodhoundContextDB: DbContext
     {
-        public DbSet<AccountLoginViewModel> Users { get; set; }
+        public DbSet<User> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySql(

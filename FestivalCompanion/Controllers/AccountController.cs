@@ -14,6 +14,8 @@ namespace FestivalCompanion.Controllers
             var data = bloodhoundContext.Users
                 .Where(u => u.Username == accountLoginModel.Username && u.Password == accountLoginModel.Password)
                 .FirstOrDefault();
+
+
             return RedirectToAction("Index");
         }
 

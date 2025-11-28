@@ -3,21 +3,20 @@
     ViewData["Title"] = "Registreer Pagina";
 }
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post))
-{
+<form method="post" asp-action="Register">
     <div class="form-group">
-        <label>Gebruikersnaam: </label>
-        @Html.TextBoxFor(m => m.Username, new { placeholder = "Gebruikersnaam" })
+        <label>Gebruikersnaam: </label>    
+        <input asp-for="Username" placeholder="Gebruikersnaam" />
     </div>
     <div class="form-group">
         <label>Wachtwoord: </label>
-        @Html.PasswordFor(m => m.Password, new { placeholder = "Wachtwoord" })
+        <input asp-for="Password" type="password" placeholder="Wachtwoord" />
     </div>
     <div class="form-group">
         <label>Herhaal Wachtwoord: </label>
-        @Html.PasswordFor(m => m.Password, new { placeholder = "Herhaal Wachtwoord" })
+        <input asp-for="Password" type="password" placeholder="Herhaal Wachtwoord" />
     </div>
     <div class="form-group">
         <button type="submit">Registreren</button>
     </div>
-}
+</form>
