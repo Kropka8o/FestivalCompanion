@@ -1,18 +1,25 @@
 ﻿@model AccountLoginViewModel
 @{
-    ViewData["Title"] = "Inlog Pagina";
+	ViewData["Title"] = "Inlog Pagina";
 }
 
-<form method="post" asp-action="Login">
-    <div class="form-group">
-        <label>Email: </label>    
-        <input asp-for="Email" type="email" placeholder="Gebruikersnaam" />
-    </div>
-    <div class="form-group">
-        <label>Wachtwoord: </label>
-        <input asp-for="Password" type="password" placeholder="Wachtwoord" />
-    </div>
-    <div class="form-group">
-        <button type="submit">Inloggen</button>
-    </div>
-</form>
+<main class="loginscherm">
+	<div class="wrapper">
+		<figure class="keuzeschermLogo">
+			<img src="img/bloodhoundlogowit.png" alt="Bloodhound Logo Wit" />
+		</figure>
+
+		<form method="post" asp-action="Login">
+			<div class="form-group">
+				<input asp-for="Email" type="email" placeholder="Gebruikersnaam" />
+			</div>
+			<div class="form-group">
+				<input asp-for="Password" type="password" placeholder="Wachtwoord" />
+			</div>
+			<div class="form-group">
+				<button type="submit">Inloggen</button>
+			</div>
+		</form>
+	</div>
+
+</main>
