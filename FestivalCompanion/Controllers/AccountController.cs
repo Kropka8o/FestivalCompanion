@@ -7,18 +7,6 @@ namespace FestivalCompanion.Controllers
 {
     public class AccountController : Controller
     {
-        [HttpPost]
-        public IActionResult Login(AccountLoginViewModel accountLoginModel)
-        {
-            BloodhoundContextDB bloodhoundContext = new BloodhoundContextDB();
-            var data = bloodhoundContext.Users
-                .Where(u => u.Username == accountLoginModel.Username && u.Password == accountLoginModel.Password)
-                .FirstOrDefault();
-
-
-            return RedirectToAction("Index");
-        }
-
 
         // GET: AcountController
         public IActionResult Login()
@@ -26,10 +14,43 @@ namespace FestivalCompanion.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Login(AccountLoginViewModel accountLoginModel)
+        {
+            BloodhoundContextDB bloodhoundContext = new BloodhoundContextDB();
+            var data = bloodhoundContext.Gebruiker
+                .Where(g => g.Email == accountLoginModel.Email && g.Wachtwoord == accountLoginModel.Password)
+                .FirstOrDefault();
+
+
+            // Source - https://stackoverflow.com/a
+            // Posted by Rory McCrossan
+            // Retrieved 2025-12-01, License - CC BY-SA 3.0
+
+            return RedirectToAction("Index", "Home", new { area = "Home" });
+        }
+
         public IActionResult Register()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Register(AccountRegisterViewModel accountRegisterModel)
+        {
+            BloodhoundContextDB bloodhoundContext = new BloodhoundContextDB();
+            User newUser = new User
+            {
+                Naam = accountRegisterModel.Name,
+                Email = accountRegisterModel.Email,
+                Leeftijd = accountRegisterModel.DateOfBirth,
+                Wachtwoord = accountRegisterModel.Password,
+            };
+            bloodhoundContext.Gebruiker.Add(newUser);
+            bloodhoundContext.SaveChanges();
+            return RedirectToAction("Login");
+        }
+
 
         // GET: AcountController/Details/5
         public ActionResult Details(int id)

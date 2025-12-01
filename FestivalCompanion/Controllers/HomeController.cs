@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using FestivalCompanion.Data;
 using FestivalCompanion.Models;
 using Microsoft.AspNetCore.Mvc;
 
