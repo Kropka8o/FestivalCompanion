@@ -2,3 +2,24 @@
 	ViewData["Title"] = "Home Page";
 }
 
+@section introscherm {
+    <section id="waarschuwing">
+        Oeps! Deze website is alleen toegankelijk op mobiele apparaten.
+    </section>
+    <section id="introscherm">
+        <img src="@Url.Content("~/img/bloodhoundlogopaars.png")" alt="Bloodhound Logo Paars" class="logoAnimatie introLogo" />
+    </section>
+ }
+
+<main id="keuzescherm">
+    <div class="wrapper">
+        <figure class="keuzeschermLogo">
+            <img src="img/bloodhoundlogowit.png" alt="Bloodhound Logo Wit" />
+        </figure>
+
+        <section class="accountBtns">
+            <button class="inlogBtn">Inloggen</button>
+            <button class="registreerBtn">Registreren</button>
+        </section>
+    </div>
+</main>
