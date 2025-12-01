@@ -1,7 +1,9 @@
 ﻿using FestivalCompanion.Data;
 using FestivalCompanion.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace FestivalCompanion.Controllers
 {
@@ -22,11 +24,7 @@ namespace FestivalCompanion.Controllers
                 .Where(g => g.Email == accountLoginModel.Email && g.Wachtwoord == accountLoginModel.Password)
                 .FirstOrDefault();
 
-
-            // Source - https://stackoverflow.com/a
-            // Posted by Rory McCrossan
-            // Retrieved 2025-12-01, License - CC BY-SA 3.0
-
+            HttpContext.Session.SetInt32("UserID", data.Gebruiker_ID);
             return RedirectToAction("Index", "Home", new { area = "Home" });
         }
 
@@ -49,6 +47,12 @@ namespace FestivalCompanion.Controllers
             bloodhoundContext.Gebruiker.Add(newUser);
             bloodhoundContext.SaveChanges();
             return RedirectToAction("Login");
+        }
+
+        public async Task<ActionResult> Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
 
