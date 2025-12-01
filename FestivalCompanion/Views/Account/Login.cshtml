@@ -3,13 +3,13 @@
 	ViewData["Title"] = "Inlog Pagina";
 }
 
-<main class="loginscherm">
+<main class="authscherm">
 	<div class="wrapper">
-		<figure class="keuzeschermLogo">
-			<img src="img/bloodhoundlogowit.png" alt="Bloodhound Logo Wit" />
+		<figure class="grootLogo">
+			<img src="/img/bloodhoundlogowit.png" alt="Bloodhound Logo Wit" />
 		</figure>
 
-		<form method="post" asp-action="Login">
+		<form method="post" asp-action="Login" class="loginForm">
 			<div class="form-group">
 				<input asp-for="Email" type="email" placeholder="Gebruikersnaam" />
 			</div>
@@ -17,7 +17,7 @@
 				<input asp-for="Password" type="password" placeholder="Wachtwoord" />
 			</div>
 			<div class="form-group">
-				<button type="submit">Inloggen</button>
+				<button class="inlogBtn" type="submit">Inloggen</button>
 			</div>
 		</form>
 	</div>
