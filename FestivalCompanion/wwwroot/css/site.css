@@ -1,22 +1,29 @@
-html {
-  font-size: 14px;
+:root {
+    --donkerBlauw: #050B21;
+    --wit: #E3D6C5;
+    --oranje: #B62410;
+    --blauwPaars: #6B3FF9;
+    --logoFont: "Oi", serif;
+    --headingFont: "Teko", sans-serif;
+    --subheadingFont: "Inter", sans-serif;
+    --normaleTextFont: "Inter", sans-serif;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
 
 body {
-  margin-bottom: 60px;
+    margin: 0;
+    background-color: var(--donkerBlauw);
+    height: 100vh;
+    overflow-y: hidden;
 }
+
+.wrapper {
+    height: 80%;
+    padding: 2rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
