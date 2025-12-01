@@ -27,6 +27,16 @@ img {
     height: auto;
 }
 
+button {
+    font-family: var(--headingFont);
+    font-size: 24px;
+    font-weight: 600;
+    border: var(--wit) 4px solid;
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
+    -moz-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
+    box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
+}
 
 #waarschuwing, #keuzescherm {
     display: none;
@@ -49,7 +59,7 @@ img {
     width: 90%;
 }
 
-#keuzescherm {
+#keuzescherm, .authscherm {
     height: 100%;
     overflow-y: hidden;
     background-image: url(/img/keuzeschermbg.jpg);
@@ -66,7 +76,14 @@ img {
         justify-content: space-around;
     }
 
-.keuzeschermLogo {
+    .authscherm .wrapper {
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+.grootLogo {
     width: 100%;
     margin: 0;
     padding: 0;
@@ -83,19 +100,6 @@ img {
     height: 20%;
 }
 
-
-    .accountBtns button {
-        font-family: var(--headingFont);
-        font-size: 24px;
-        font-weight: 600;
-        border: var(--wit) 4px solid;
-        border-radius: 12px;
-        height: 40%;
-        -webkit-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
-        -moz-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
-        box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
-    }
-
 .inlogBtn {
     background-color: var(--wit);
     color: var(--donkerBlauw);
@@ -105,6 +109,44 @@ img {
     background-color: transparent;
     color: var(--wit);
 }
+
+.authscherm form{
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.authscherm .form-group {
+    height: 25%;
+    display: flex;
+    align-items: center;
+}
+.authscherm input {
+    width: 100%;
+    height: 90%;
+    background-color: transparent;
+    color: var(--wit);
+    font-family: var(--headingFont);
+    font-size: 24px;
+    font-weight: 600;
+    border: var(--wit) 4px solid;
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
+    -moz-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
+    box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
+    text-align: center;
+}
+
+.authscherm input::placeholder{
+    color: var(--wit);
+    text-align: center;
+}
+
+.authscherm button{
+    width: 100%;
+}
+
 
 @media screen and (min-width: 601px) {
     #waarschuwing {
