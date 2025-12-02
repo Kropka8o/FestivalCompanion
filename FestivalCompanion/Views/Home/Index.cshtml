@@ -4,6 +4,7 @@
 
 @section introscherm {
 	<article class="waarschuwingscherm">
+
 		<div class="wrapper">
 			<figure class="beeldmerk">
 				<img src="~/img/bloodhoundbeeldmerkrood.png" alt="Bloodhound Beeldmerk Rood" />
@@ -21,6 +22,10 @@
  }
 
 <main id="keuzescherm">
+	<video autoplay muted loop id="myVideo">
+		<source src="/img/keuzeschermbgVideo.mp4" type="video/mp4">
+	</video>
+
 	<div class="wrapper">
 		<figure class="grootLogo">
 			<img src="img/bloodhoundlogowit.png" alt="Bloodhound Logo Wit" />
@@ -30,6 +35,5 @@
 			<a class="inlogBtn" asp-area="" asp-controller="Account" asp-action="Login">Inloggen</a>
 			<a class="registreerBtn" asp-area="" asp-controller="Account" asp-action="Register">Registeren</a>
 		</section>
-
 	</div>
 </main>
