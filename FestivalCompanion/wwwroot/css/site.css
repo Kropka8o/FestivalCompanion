@@ -1,22 +1,338 @@
-html {
-  font-size: 14px;
+:root {
+    --donkerBlauw: #050B21;
+    --wit: #E3D6C5;
+    --oranje: #B62410;
+    --blauwPaars: #6B3FF9;
+    --logoFont: "Oi", serif;
+    --headingFont: "Teko", sans-serif;
+    --subheadingFont: "Inter", sans-serif;
+    --normaleTextFont: "Inter", sans-serif;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
 
 body {
-  margin-bottom: 60px;
+    margin: 0;
+    background-color: var(--donkerBlauw);
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+.wrapper {
+    height: 80%;
+    padding: 2rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button, .accountBtns a {
+    font-family: var(--headingFont);
+    font-size: 24px;
+    font-weight: 600;
+    border: var(--wit) 4px solid;
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
+    -moz-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
+    box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
+    text-decoration: none;
+    text-align: center;
+}
+
+#keuzescherm, .waarschuwingscherm {
+    display: none;
+}
+
+#waarschuwing{
+   font-family: var(--headingFont);
+   font-size: 32px;
+   text-align: center;
+   color: var(--wit);
+}
+
+.waarschuwingscherm {
+    height: 100%;
+}
+    .waarschuwingscherm .wrapper {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+.beeldmerk {
+    height: 20%;
+}
+
+.beeldmerk img{
+   max-height: 100%;
+}
+
+
+
+#introscherm {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+#introscherm {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: hidden;
+}
+
+.introLogo {
+    width: 90%;
+}
+
+#keuzescherm, .authscherm {
+    height: 100%;
+    overflow-y: hidden;
+    background-image: url(/img/keuzeschermbg.jpg);
+    background-position: top left;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+    #keuzescherm .wrapper {
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .authscherm .wrapper {
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+.grootLogo {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.accountBtns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    height: 20%;
+}
+
+.inlogBtn {
+    background-color: var(--wit);
+    color: var(--donkerBlauw);
+}
+
+.registreerBtn {
+    background-color: transparent;
+    color: var(--wit);
+}
+
+.authscherm form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.loginForm {
+    height: 40%;
+}
+
+.registreerForm{
+    height: 60%;
+}
+
+.authscherm .form-group {
+    display: flex;
+    align-items: center;
+}
+
+.loginForm .form-group{
+    height: 25%;
+}
+
+.registreerForm .form-group{
+    height: 20%;
+}
+
+.registreerForm input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.authscherm input {
+    width: 100%;
+    height: 90%;
+    background-color: transparent;
+    color: var(--wit);
+    font-family: var(--headingFont);
+    font-size: 24px;
+    font-weight: 600;
+    border: var(--wit) 4px solid;
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
+    -moz-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
+    box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
+    text-align: center;
+}
+
+.authscherm input::placeholder{
+    color: var(--wit);
+    text-align: center;
+}
+
+.authscherm button{
+    width: 100%;
+}
+
+
+@media screen and (min-width: 601px) {
+    .waarschuwingscherm {
+        display: block;
+    }
+
+    #introscherm, #keuzescherm {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+}
+
+@media screen and (max-width: 480px) {
+}
+
+@media screen and (max-width: 414px) {
+}
+
+
+/*animatie sectie*/
+.logoAnimatie {
+    -webkit-animation: logoAnimatie 1.2s;
+    animation: logoAnimatie 1.2s;
+}
+
+@-webkit-keyframes logoAnimatie {
+    0% {
+        -webkit-transform: translateY(-45px);
+        transform: translateY(-45px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+        opacity: 1
+    }
+
+    24% {
+        opacity: 1
+    }
+
+    40% {
+        -webkit-transform: translateY(-24px);
+        transform: translateY(-24px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in
+    }
+
+    65% {
+        -webkit-transform: translateY(-12px);
+        transform: translateY(-12px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in
+    }
+
+    82% {
+        -webkit-transform: translateY(-6px);
+        transform: translateY(-6px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in
+    }
+
+    93% {
+        -webkit-transform: translateY(-4px);
+        transform: translateY(-4px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in
+    }
+
+    25%, 55%, 75%, 87% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+        opacity: 1
+    }
+}
+
+@keyframes logoAnimatie {
+    0% {
+        -webkit-transform: translateY(-45px);
+        transform: translateY(-45px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+        opacity: 1
+    }
+
+    24% {
+        opacity: 1
+    }
+
+    40% {
+        -webkit-transform: translateY(-24px);
+        transform: translateY(-24px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in
+    }
+
+    65% {
+        -webkit-transform: translateY(-12px);
+        transform: translateY(-12px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in
+    }
+
+    82% {
+        -webkit-transform: translateY(-6px);
+        transform: translateY(-6px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in
+    }
+
+    93% {
+        -webkit-transform: translateY(-4px);
+        transform: translateY(-4px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in
+    }
+
+    25%, 55%, 75%, 87% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+        opacity: 1
+    }
 }

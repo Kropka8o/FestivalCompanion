@@ -1,8 +1,35 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@section introscherm {
+	<article class="waarschuwingscherm">
+		<div class="wrapper">
+			<figure class="beeldmerk">
+				<img src="~/img/bloodhoundbeeldmerkrood.png" alt="Bloodhound Beeldmerk Rood" />
+			</figure>
+
+			<section id="waarschuwing">
+				Oeps! Deze app is alleen toegankelijk op mobiele apparaten.
+			</section>
+		</div>
+	</article>
+
+	<section id="introscherm">
+		<img src="@Url.Content("~/img/bloodhoundlogopaars.png")" alt="Bloodhound Logo Paars" class="logoAnimatie introLogo" />
+	</section>
+ }
+
+<main id="keuzescherm">
+	<div class="wrapper">
+		<figure class="grootLogo">
+			<img src="img/bloodhoundlogowit.png" alt="Bloodhound Logo Wit" />
+		</figure>
+
+		<section class="accountBtns">
+			<a class="inlogBtn" asp-area="" asp-controller="Account" asp-action="Login">Inloggen</a>
+			<a class="registreerBtn" asp-area="" asp-controller="Account" asp-action="Register">Registeren</a>
+		</section>
+
+	</div>
+</main>

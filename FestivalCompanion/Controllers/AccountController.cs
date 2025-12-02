@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using FestivalCompanion.Models; // Voor User en PasswordHasher
+﻿using FestivalCompanion.Data;
+using FestivalCompanion.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore; // Voor FirstOrDefaultAsync
 using System.Threading.Tasks;
-using FestivalCompanion.Data; // <-- Add this using for BloodhoundContextDB
 
 namespace FestivalCompanion.Controllers
 {
@@ -21,7 +23,13 @@ namespace FestivalCompanion.Controllers
         // GET: AccountController/Login
         public IActionResult Login()
         {
-            return View(); // Laadt de Login View
+            BloodhoundContextDB bloodhoundContext = new BloodhoundContextDB();
+            var data = bloodhoundContext.Gebruiker
+                .Where(g => g.Email == accountLoginModel.Email && g.Wachtwoord == accountLoginModel.Password)
+                .FirstOrDefault();
+
+            HttpContext.Session.SetInt32("UserID", data.Gebruiker_ID);
+            return RedirectToAction("Index", "Home", new { area = "Home" });
         }
 
         // POST: Login Logica (Wachtwoord VERIFIËREN)
@@ -37,6 +45,13 @@ namespace FestivalCompanion.Controllers
 
             // 2. Zoek de gebruiker
             var user = await _db.Gebruiker.FirstOrDefaultAsync(g => g.Email == model.Email);
+
+        public async Task<ActionResult> Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
 
             // 3. Verificatie van de hash:
             // Check: 1) Bestaat de gebruiker? OF 2) Klopt het wachtwoord?
