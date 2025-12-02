@@ -27,7 +27,7 @@ img {
     height: auto;
 }
 
-button {
+button, .accountBtns a {
     font-family: var(--headingFont);
     font-size: 24px;
     font-weight: 600;
@@ -36,12 +36,28 @@ button {
     -webkit-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
     -moz-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
     box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
+    text-decoration: none;
+    text-align: center;
 }
 
-#waarschuwing, #keuzescherm {
+#keuzescherm, .waarschuwingscherm {
     display: none;
 }
 
+#waarschuwing{
+   font-family: var(--headingFont);
+   font-size: 32px;
+   text-align: center;
+   color: var(--wit);
+}
+
+/*.waarschuwingscherm{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}*/
 #introscherm {
     opacity: 1;
     transition: opacity 0.5s ease;
@@ -111,17 +127,36 @@ button {
 }
 
 .authscherm form{
-    height: 40%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
+.loginForm {
+    height: 40%;
+}
+
+.registreerForm{
+    height: 60%;
+}
+
 .authscherm .form-group {
-    height: 25%;
     display: flex;
     align-items: center;
 }
+
+.loginForm .form-group{
+    height: 25%;
+}
+
+.registreerForm .form-group{
+    height: 20%;
+}
+
+.registreerForm input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
 .authscherm input {
     width: 100%;
     height: 90%;
@@ -149,7 +184,7 @@ button {
 
 
 @media screen and (min-width: 601px) {
-    #waarschuwing {
+    .waarschuwingscherm {
         display: block;
     }
 
@@ -167,163 +202,3 @@ button {
 @media screen and (max-width: 414px) {
 }
 
-@media screen and (max-width: 375px) {
-}
-
-@media screen and (max-width: 320px) {
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*animatie sectie*/
-.logoAnimatie {
-    -webkit-animation: logoAnimatie 1.2s;
-    animation: logoAnimatie 1.2s;
-}
-
-@-webkit-keyframes logoAnimatie {
-    0% {
-        -webkit-transform: translateY(-45px);
-        transform: translateY(-45px);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in;
-        opacity: 1
-    }
-
-    24% {
-        opacity: 1
-    }
-
-    40% {
-        -webkit-transform: translateY(-24px);
-        transform: translateY(-24px);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in
-    }
-
-    65% {
-        -webkit-transform: translateY(-12px);
-        transform: translateY(-12px);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in
-    }
-
-    82% {
-        -webkit-transform: translateY(-6px);
-        transform: translateY(-6px);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in
-    }
-
-    93% {
-        -webkit-transform: translateY(-4px);
-        transform: translateY(-4px);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in
-    }
-
-    25%, 55%, 75%, 87% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-        -webkit-animation-timing-function: ease-out;
-        animation-timing-function: ease-out
-    }
-
-    100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-        -webkit-animation-timing-function: ease-out;
-        animation-timing-function: ease-out;
-        opacity: 1
-    }
-}
-
-@keyframes logoAnimatie {
-    0% {
-        -webkit-transform: translateY(-45px);
-        transform: translateY(-45px);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in;
-        opacity: 1
-    }
-
-    24% {
-        opacity: 1
-    }
-
-    40% {
-        -webkit-transform: translateY(-24px);
-        transform: translateY(-24px);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in
-    }
-
-    65% {
-        -webkit-transform: translateY(-12px);
-        transform: translateY(-12px);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in
-    }
-
-    82% {
-        -webkit-transform: translateY(-6px);
-        transform: translateY(-6px);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in
-    }
-
-    93% {
-        -webkit-transform: translateY(-4px);
-        transform: translateY(-4px);
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in
-    }
-
-    25%, 55%, 75%, 87% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-        -webkit-animation-timing-function: ease-out;
-        animation-timing-function: ease-out
-    }
-
-    100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-        -webkit-animation-timing-function: ease-out;
-        animation-timing-function: ease-out;
-        opacity: 1
-    }
-}

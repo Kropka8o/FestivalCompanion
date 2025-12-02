@@ -3,23 +3,31 @@
 }
 
 @section introscherm {
-    <section id="waarschuwing">
-        Oeps! Deze website is alleen toegankelijk op mobiele apparaten.
-    </section>
-    <section id="introscherm">
-        <img src="@Url.Content("~/img/bloodhoundlogopaars.png")" alt="Bloodhound Logo Paars" class="logoAnimatie introLogo" />
-    </section>
+	<article class="waarschuwingscherm">
+		<figure class="beeldmerk">
+			<img src="~/img/bloodhoundbeeldmerkrood.png" alt="Bloodhound Beeldmerk Rood" />
+		</figure>
+
+		<section id="waarschuwing">
+			Oeps! Deze app is alleen toegankelijk op mobiele apparaten.
+		</section>
+	</article>
+
+	<section id="introscherm">
+		<img src="@Url.Content("~/img/bloodhoundlogopaars.png")" alt="Bloodhound Logo Paars" class="logoAnimatie introLogo" />
+	</section>
  }
 
 <main id="keuzescherm">
-    <div class="wrapper">
-        <figure class="grootLogo">
-            <img src="img/bloodhoundlogowit.png" alt="Bloodhound Logo Wit" />
-        </figure>
+	<div class="wrapper">
+		<figure class="grootLogo">
+			<img src="img/bloodhoundlogowit.png" alt="Bloodhound Logo Wit" />
+		</figure>
 
-        <section class="accountBtns">
-            <a class="inlogBtn" asp-area="" asp-controller="Account" asp-action="Login">Inloggen</a>
-            <a class="registreerBtn" asp-area="" asp-controller="Account" asp-action="Register">Registeren</a>
-        </section>
-    </div>
+		<section class="accountBtns">
+			<a class="inlogBtn" asp-area="" asp-controller="Account" asp-action="Login">Inloggen</a>
+			<a class="registreerBtn" asp-area="" asp-controller="Account" asp-action="Register">Registeren</a>
+		</section>
+
+	</div>
 </main>
