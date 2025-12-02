@@ -1,55 +1,53 @@
 ﻿using Isopoh.Cryptography.Argon2;
 using System.Text;
+using System.Security.Cryptography; // Voor de Salt generator
 
-namespace FestivalCompanion.Models // Let op: De namespace is nu 'FestivalCompanion.Models'
+namespace FestivalCompanion.Models // <-- Zorg dat dit de juiste namespace is
 {
-    public class PasswordHasher // Let op: Classnaam is 'PasswordHasher', niet 'PasswordHaser'
+    // De juiste naam van de klasse
+    public class PasswordHasher
     {
-        // De beveiligingsparameters voor Argon2id (512MB, 3 iteraties, 4 threads)
         private readonly Argon2Config _configDefaults;
 
         public PasswordHasher()
         {
-            // Configuratie gebaseerd op de gevraagde veilige parameters
             _configDefaults = new Argon2Config
             {
-                Type = Argon2.Argon2Type.Id,     // Argon2id: Meest veilige variant
-                Version = Argon2.Argon2Version.Version13,
-                HashLength = 32,                // Output hash lengte (256-bit)
+                // FIX: Gebruik de juiste enumwaarde voor Argon2Type
+                Type = Argon2Type.HybridAddressing,
+                Version = Argon2Version.Nineteen,
+                HashLength = 32,                    // 256-bit output hash
 
-                // Custom Performance Parameters (tegen brute-force)
-                TimeCost = 3,                   // Iteraties: Tijdskosten
-                MemoryCost = 524288,            // Geheugenkosten: 512 * 1024 = 524288 KiB
-                Lanes = 4,                      // Parallelisme: Hoeveel threads er werken
+                // Custom Performance Parameters
+                TimeCost = 3,
+                MemoryCost = 524288,                // 512 MB
+                Lanes = 4,
             };
         }
 
-        /// <summary>
-        /// Maakt een veilige, onomkeerbare hash van het wachtwoord.
-        /// </summary>
-        /// <param name="password">Het plaintext wachtwoord.</param>
-        /// <returns>De volledige hashstring, inclusief salt en parameters.</returns>
         public string HashPassword(string password)
         {
-            var config = (Argon2Config)_configDefaults.Clone();
+            // FIX: Gebruik een object-initializer om de waarden van de defaults over te nemen
+            var config = new Argon2Config
+            {
+                Type = _configDefaults.Type,
+                Version = _configDefaults.Version,
+                HashLength = _configDefaults.HashLength,
+                TimeCost = _configDefaults.TimeCost,
+                MemoryCost = _configDefaults.MemoryCost,
+                Lanes = _configDefaults.Lanes,
 
-            // Stel het wachtwoord in en genereer een unieke salt
-            config.Password = Encoding.UTF8.GetBytes(password);
-            config.Salt = Argon2.GenSalt();
+                Password = Encoding.UTF8.GetBytes(password),
+                // FIX: Maak een cryptografisch veilige salt (GenSalt is verwijderd/veranderd in v2.0.0)
+                Salt = new byte[16]
+            };
+            RandomNumberGenerator.Fill(config.Salt); // Vul de salt met veilige willekeurige bytes
 
-            // Hash en retourneer de veilige string
             return Argon2.Hash(config);
         }
 
-        /// <summary>
-        /// Verifieert een plaintext wachtwoord tegen een bestaande Argon2 hash.
-        /// </summary>
-        /// <param name="password">Het plaintext wachtwoord dat de gebruiker heeft ingevoerd.</param>
-        /// <param name="hash">De hashstring uit de database.</param>
-        /// <returns>True als de wachtwoorden overeenkomen, anders False.</returns>
         public bool VerifyPassword(string password, string hash)
         {
-            // De Argon2.Verify leest de parameters en salt automatisch uit de hashstring.
             return Argon2.Verify(hash, password);
         }
     }
