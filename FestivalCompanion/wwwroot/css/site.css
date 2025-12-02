@@ -51,13 +51,27 @@ button, .accountBtns a {
    color: var(--wit);
 }
 
-/*.waarschuwingscherm{
-    display: flex;
-    flex-direction: column;
+.waarschuwingscherm {
     height: 100%;
-    justify-content: center;
-    align-items: center;
-}*/
+}
+    .waarschuwingscherm .wrapper {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+.beeldmerk {
+    height: 20%;
+}
+
+.beeldmerk img{
+   max-height: 100%;
+}
+
+
+
 #introscherm {
     opacity: 1;
     transition: opacity 0.5s ease;
