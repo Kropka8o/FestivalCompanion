@@ -1,124 +1,91 @@
-﻿using FestivalCompanion.Data;
-using FestivalCompanion.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using FestivalCompanion.Models; // Voor User en PasswordHasher
+using Microsoft.EntityFrameworkCore; // Voor FirstOrDefaultAsync
+using System.Threading.Tasks;
+using FestivalCompanion.Data; // <-- Add this using for BloodhoundContextDB
 
 namespace FestivalCompanion.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly PasswordHasher _hasher;
+        private readonly BloodhoundContextDB _db; // Jouw database context
 
-        // GET: AcountController
+        // Injecteer de PasswordHasher en de DbContext in de constructor
+        public AccountController(BloodhoundContextDB db, PasswordHasher hasher)
+        {
+            _db = db;
+            _hasher = hasher;
+        }
+
+        // GET: AccountController/Login
         public IActionResult Login()
         {
-            return View();
+            return View(); // Laadt de Login View
         }
 
+        // POST: Login Logica (Wachtwoord VERIFIËREN)
         [HttpPost]
-        public IActionResult Login(AccountLoginViewModel accountLoginModel)
+        public async Task<IActionResult> Login(AccountLoginViewModel model)
         {
-            BloodhoundContextDB bloodhoundContext = new BloodhoundContextDB();
-            var data = bloodhoundContext.Gebruiker
-                .Where(g => g.Email == accountLoginModel.Email && g.Wachtwoord == accountLoginModel.Password)
-                .FirstOrDefault();
+            // 1. Validatie (Inputvalidatie check)
+            if (!ModelState.IsValid)
+            {
+                // Toont de foutmeldingen van de Data Annotations
+                return View(model);
+            }
 
+            // 2. Zoek de gebruiker
+            var user = await _db.Gebruiker.FirstOrDefaultAsync(g => g.Email == model.Email);
 
-            // Source - https://stackoverflow.com/a
-            // Posted by Rory McCrossan
-            // Retrieved 2025-12-01, License - CC BY-SA 3.0
+            // 3. Verificatie van de hash:
+            // Check: 1) Bestaat de gebruiker? OF 2) Klopt het wachtwoord?
+            if (user == null || !_hasher.VerifyPassword(model.Password, user.WachtwoordHash))
+            {
+                // Veilige foutmelding
+                TempData["Error"] = "Inloggegevens zijn niet correct.";
+                return View(model);
+            }
 
-            return RedirectToAction("Index", "Home", new { area = "Home" });
+            // 4. Succes: Authentication Ticket toevoegen (Hier voeg je de inlogsessie toe)
+            // ... (Jouw code voor het inloggen van de gebruiker) ...
+
+            return RedirectToAction("Index", "Home");
         }
 
+        // GET: AccountController/Register
         public IActionResult Register()
         {
-            return View();
+            return View(); // Laadt de Register View
         }
 
+        // POST: Registratie Logica (Wachtwoord HASHSEN)
         [HttpPost]
-        public IActionResult Register(AccountRegisterViewModel accountRegisterModel)
+        public IActionResult Register(AccountRegisterViewModel model)
         {
-            BloodhoundContextDB bloodhoundContext = new BloodhoundContextDB();
-            User newUser = new User
+            // 1. Validatie (Inputvalidatie check)
+            if (!ModelState.IsValid)
             {
-                Naam = accountRegisterModel.Name,
-                Email = accountRegisterModel.Email,
-                Leeftijd = accountRegisterModel.DateOfBirth,
-                Wachtwoord = accountRegisterModel.Password,
+                return View(model);
+            }
+
+            // 2. HASHSEN: Roep de Argon2id methode aan
+            var user = new User
+            {
+                Naam = model.Name,
+                Email = model.Email,
+                Leeftijd = model.DateOfBirth, // Let op: model.DateOfBirth moet overeenkomen met de input
+                WachtwoordHash = _hasher.HashPassword(model.Password) // <-- HASHSEN
             };
-            bloodhoundContext.Gebruiker.Add(newUser);
-            bloodhoundContext.SaveChanges();
+
+            // 3. Database opslag
+            _db.Gebruiker.Add(user);
+            _db.SaveChanges();
+
             return RedirectToAction("Login");
         }
 
-
-        // GET: AcountController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: AcountController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: AcountController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: AcountController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: AcountController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: AcountController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: AcountController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        // Let op: De standaard CRUD-functies (Details, Create, Edit, Delete) 
+        // uit de oude code zijn hier weggelaten omdat je ze niet nodig hebt voor de login/registratie.
     }
 }
