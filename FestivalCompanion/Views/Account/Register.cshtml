@@ -1,36 +1,30 @@
 ﻿@model AccountRegisterViewModel
 @{
-	ViewData["Title"] = "Registreer Pagina";
+    ViewData["Title"] = "Registreer Pagina";
 }
 
-<main class="authscherm">
-	<div class="wrapper">
-		<figure class="grootLogo">
-			<img src="/img/bloodhoundlogowit.png" alt="Bloodhound Logo Wit" />
-		</figure>
-
-		<form method="post" asp-action="Register" class="registreerForm">
-			<div class="form-group">
-				<input asp-for="Name" placeholder="Gebruikersnaam" />
-			</div>
-			<div class="form-group">
-				<input asp-for="Email" type="email" placeholder="Email" />
-			</div>
-			<div class="form-group">
-				<input asp-for="DateOfBirth" type="date" />
-			</div>
-			<div class="form-group">
-				<input asp-for="Password" type="password" placeholder="Wachtwoord" />
-			</div>
-			<div class="form-group">
-				<input asp-for="ConfirmPassword" type="password" placeholder="Herhaal Wachtwoord" />
-			</div>
-			<div class="form-group">
-				<button type="submit">Registreren</button>
-			</div>
-		</form>
-
-		@* Kan er hier een redirect naar login komen? *@
-
-	</div>
-</main>
+<form method="post" asp-action="Register">
+    <div class="form-group">
+        <label>Naam: </label>    
+        <input asp-for="Name" placeholder="Gebruikersnaam" />
+    </div>
+    <div class="form-group">
+        <label>Email: </label>    
+        <input asp-for="Email" type="email" placeholder="Email" />
+    </div>
+    <div>
+        <label>Geboortedatum: </label>    
+        <input asp-for="DateOfBirth" type="date" />
+    </div>
+    <div class="form-group">
+        <label>Wachtwoord: </label>
+        <input asp-for="Password" type="password" placeholder="Wachtwoord" />
+    </div>
+    <div class="form-group">
+        <label>Herhaal Wachtwoord: </label>
+        <input asp-for="ConfirmPassword" type="password" placeholder="Herhaal Wachtwoord" />
+    </div>
+    <div class="form-group">
+        <button type="submit">Registreren</button>
+    </div>
+</form>

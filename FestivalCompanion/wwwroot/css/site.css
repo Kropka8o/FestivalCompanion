@@ -9,6 +9,7 @@
     --normaleTextFont: "Inter", sans-serif;
 }
 
+
 body {
     margin: 0;
     background-color: var(--donkerBlauw);
@@ -26,7 +27,7 @@ img {
     height: auto;
 }
 
-button, .accountBtns a {
+button {
     font-family: var(--headingFont);
     font-size: 24px;
     font-weight: 600;
@@ -35,8 +36,6 @@ button, .accountBtns a {
     -webkit-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
     -moz-box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
     box-shadow: 0px 0px 10px 4px rgba(227, 214, 197, 0.29);
-    text-decoration: none;
-    text-align: center;
 }
 
 #waarschuwing, #keuzescherm {
@@ -112,36 +111,17 @@ button, .accountBtns a {
 }
 
 .authscherm form{
+    height: 40%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-.loginForm {
-    height: 40%;
-}
-
-.registreerForm{
-    height: 60%;
-}
-
 .authscherm .form-group {
+    height: 25%;
     display: flex;
     align-items: center;
 }
-
-.loginForm .form-group{
-    height: 25%;
-}
-
-.registreerForm .form-group{
-    height: 20%;
-}
-
-.registreerForm input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
-}
-
 .authscherm input {
     width: 100%;
     height: 90%;
