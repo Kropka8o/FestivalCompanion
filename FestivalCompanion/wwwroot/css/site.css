@@ -138,6 +138,10 @@ button, .accountBtns a {
     height: 20%;
 }
 
+.registreerForm input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
 .authscherm input {
     width: 100%;
     height: 90%;
