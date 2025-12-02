@@ -21,11 +21,16 @@ namespace FestivalCompanion.Controllers
         }
 
         // GET: AccountController/Login
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public IActionResult Login(AccountLoginViewModel accountLoginModel)
         {
-            BloodhoundContextDB bloodhoundContext = new BloodhoundContextDB();
-            var user = bloodhoundContext.Gebruiker
-                .Where(g => g.Email == accountLoginModel.Email && g.Wachtwoord == accountLoginModel.Password)
+            var user = _db.Gebruiker
+                .Where(g => g.Email == accountLoginModel.Email)
                 .FirstOrDefault();
 
             // 3. Verificatie van de hash:
@@ -59,6 +64,7 @@ namespace FestivalCompanion.Controllers
 
         // POST: Registratie Logica (Wachtwoord HASHSEN)
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Register(AccountRegisterViewModel accountRegisterModel)
         {
             // 1. Validatie (Inputvalidatie check)
