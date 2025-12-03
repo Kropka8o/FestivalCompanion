@@ -1,9 +1,6 @@
 ﻿using FestivalCompanion.Data;
 using FestivalCompanion.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace FestivalCompanion.Controllers
 {
@@ -52,7 +49,7 @@ namespace FestivalCompanion.Controllers
         public async Task<ActionResult> Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Map", "Map");
         }
 
 

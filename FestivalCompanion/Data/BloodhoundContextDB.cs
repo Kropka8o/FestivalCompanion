@@ -12,7 +12,7 @@ namespace FestivalCompanion.Data
             optionsBuilder.UseMySql(
                 "server=20.251.197.217;port=3306;user=Groep_F;password=@@rdaPPel23!;database=Bloodhound;",
                 ServerVersion.Parse("8.0.44")
-                
+
                 );
         }
 
