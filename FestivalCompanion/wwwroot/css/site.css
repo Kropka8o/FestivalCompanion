@@ -101,6 +101,7 @@ button, .accountBtns a {
     z-index: 1;
     height: 100%;
     overflow-y: hidden;
+    /*Laat dit staan, dit gaat gebruikt worden in mijn A/B testing*/
 /*    background-image: url(/img/keuzeschermbg.jpg);
     background-position: top left;
     background-size: cover;*/
