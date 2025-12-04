@@ -1,23 +1,49 @@
-﻿@{
+﻿@model IAsyncEnumerable<FestivalCompanion.Models.Location>
+@using System.Text.Json
+
+@{
     ViewData["Title"] = "Map";
+    var locations = new List<FestivalCompanion.Models.Location>();
 }
 
-<div>
-    <div id="map" style="height:100vh; width:calc(100vw);"></div>
-</div>
+
+@await foreach (var location in Model)
+{
+    locations.Add(location);
+}
+
+<div id="map" style="height:100vh; width:100vw;"></div>
 
 @section Scripts {
     <script>
         $(function () {
-            // currently the map is centered on Amsterdam
-            var map = L.map('map').setView([52.37, 4.90], 13);
+            var map = L.map('map').setView([51.53553000, 5.07792000], 16); //Voor Babita: als je de 16 verandert, zoom je de startpositie van de kaart in of uit, mocht je dat willen.
+
+            
+
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; OpenStreetMap contributors',
                 maxZoom: 19
             }).addTo(map);
 
-            // if the map is inside a hidden/transition container, call invalidateSize:
+            
+
+            // example marker
+            L.marker([51.53495000, 5.07737000]).addTo(map).bindPopup('Hello Festival!').openPopup();
+
+            var markers = @Html.Raw(JsonSerializer.Serialize(
+                locations.Select(l => new {
+                    latitude = l.Breedtegraad,
+                    longitude = l.Lengtegraad,
+                    popup = l.Naam ?? ""
+                })
+            ));
+
+            markers.forEach(function (m) {
+                L.marker([m.longitude, m.latitude]).addTo(map).bindPopup(m.popup).openPopup();
+            });
+
             setTimeout(function () { map.invalidateSize(); }, 200);
         });
     </script>

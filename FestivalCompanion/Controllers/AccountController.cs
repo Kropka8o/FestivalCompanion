@@ -46,10 +46,10 @@ namespace FestivalCompanion.Controllers
             return RedirectToAction("Login");
         }
 
-        public async Task<ActionResult> Logout()
+        public ActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Map", "Map");
+            return RedirectToAction("Index", "Home");
         }
 
 

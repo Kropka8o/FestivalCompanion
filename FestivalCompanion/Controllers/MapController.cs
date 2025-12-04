@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FestivalCompanion.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FestivalCompanion.Controllers
 {
@@ -7,7 +9,9 @@ namespace FestivalCompanion.Controllers
         // GET: MapController
         public ActionResult Map()
         {
-            return View();
+            BloodhoundContextDB bloodhoundContext = new BloodhoundContextDB();
+            var data = bloodhoundContext.Locatie.Include(l => l.Zone);
+            return View(data);
         }
 
         // GET: MapController/Details/5
