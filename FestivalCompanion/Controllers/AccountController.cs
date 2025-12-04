@@ -45,30 +45,12 @@ namespace FestivalCompanion.Controllers
                 HttpContext.Session.SetInt32("UserID", user.Gebruiker_ID);
             return RedirectToAction("Index", "Home", new { area = "Home" });
             }
-            ;
         }
 
         public ActionResult Logout()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Register(AccountRegisterViewModel accountRegisterModel)
-        {
-            BloodhoundContextDB bloodhoundContext = new BloodhoundContextDB();
-            User newUser = new User
-            {
-                Naam = accountRegisterModel.Name,
-                Email = accountRegisterModel.Email,
-                Leeftijd = accountRegisterModel.DateOfBirth,
-                Wachtwoord = accountRegisterModel.Password,
-            };
-            bloodhoundContext.Gebruiker.Add(newUser);
-            bloodhoundContext.SaveChanges();
-            return RedirectToAction("Login");
         }
 
         // POST: Registratie Logica (Wachtwoord HASHSEN)
@@ -80,21 +62,24 @@ namespace FestivalCompanion.Controllers
             if (!ModelState.IsValid)
             {
                 return View(accountRegisterModel);
-            }
-
-            // 2. HASHSEN: Roep de Argon2id methode aans
-            var newUser = new User
+            } else
             {
-                Naam = accountRegisterModel.Name,
-                Email = accountRegisterModel.Email,
-                Leeftijd = accountRegisterModel.DateOfBirth, // Let op: model.DateOfBirth moet overeenkomen met de input
-                WachtwoordHash = _hasher.HashPassword(accountRegisterModel.Password) // <-- HASHSEN
-            };
+
+
+                // 2. HASHSEN: Roep de Argon2id methode aans
+                var newUser = new User
+                {
+                    Naam = accountRegisterModel.Name,
+                    Email = accountRegisterModel.Email,
+                    Leeftijd = accountRegisterModel.DateOfBirth, // Let op: model.DateOfBirth moet overeenkomen met de input
+                    WachtwoordHash = _hasher.HashPassword(accountRegisterModel.Password) // <-- HASHSEN
+                };
 
             // 3. Database opslag
             _db.Gebruiker.Add(newUser);
             _db.SaveChanges();
             return RedirectToAction("Login");
+            }
         }
     }
 }
