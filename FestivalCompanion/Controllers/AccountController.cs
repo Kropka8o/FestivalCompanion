@@ -53,6 +53,12 @@ namespace FestivalCompanion.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // GET: AccountController/Login
+        public IActionResult Register()
+        {
+            return View();
+        }
+
         // POST: Registratie Logica (Wachtwoord HASHSEN)
         [HttpPost]
         [ValidateAntiForgeryToken]
