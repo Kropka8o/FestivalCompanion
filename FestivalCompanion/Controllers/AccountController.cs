@@ -35,7 +35,7 @@ namespace FestivalCompanion.Controllers
 
             // 3. Verificatie van de hash:
             // Check: 1) Bestaat de gebruiker? OF 2) Klopt het wachtwoord?
-            if (user == null || !_hasher.VerifyPassword(accountLoginModel.Password, user.WachtwoordHash))
+            if (user == null || !_hasher.VerifyPassword(accountLoginModel.Password, user.Wachtwoord))
             {
                 // Veilige foutmelding
                 TempData["Error"] = "Inloggegevens zijn niet correct.";
