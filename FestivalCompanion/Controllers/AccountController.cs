@@ -33,7 +33,7 @@ namespace FestivalCompanion.Controllers
 
             // 3. Verificatie van de hash:
             // Check: 1) Bestaat de gebruiker? OF 2) Klopt het wachtwoord?
-            if (user == null || !_hasher.VerifyPassword(accountLoginModel.Password, user.WachtwoordHash))
+            if (user == null || !_hasher.VerifyPassword(accountLoginModel.Password, user.Wachtwoord))
             {
                 // Veilige foutmelding
                 TempData["Error"] = "Inloggegevens zijn niet correct.";
@@ -53,6 +53,12 @@ namespace FestivalCompanion.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // GET: AccountController/Login
+        public IActionResult Register()
+        {
+            return View();
+        }
+
         // POST: Registratie Logica (Wachtwoord HASHSEN)
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -66,14 +72,14 @@ namespace FestivalCompanion.Controllers
             {
 
 
-                // 2. HASHSEN: Roep de Argon2id methode aans
-                var newUser = new User
-                {
-                    Naam = accountRegisterModel.Name,
-                    Email = accountRegisterModel.Email,
-                    Leeftijd = accountRegisterModel.DateOfBirth, // Let op: model.DateOfBirth moet overeenkomen met de input
-                    WachtwoordHash = _hasher.HashPassword(accountRegisterModel.Password) // <-- HASHSEN
-                };
+            // 2. HASHSEN: Roep de Argon2id methode aans
+            var newUser = new User
+            {
+                Naam = accountRegisterModel.Name,
+                Email = accountRegisterModel.Email,
+                Leeftijd = accountRegisterModel.DateOfBirth, // Let op: model.DateOfBirth moet overeenkomen met de input
+                Wachtwoord = _hasher.HashPassword(accountRegisterModel.Password) // <-- HASHSEN
+            };
 
             // 3. Database opslag
             _db.Gebruiker.Add(newUser);
