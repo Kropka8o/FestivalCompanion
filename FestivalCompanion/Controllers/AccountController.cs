@@ -37,7 +37,7 @@ namespace FestivalCompanion.Controllers
             } else
             {
                 HttpContext.Session.SetInt32("UserID", user.Gebruiker_ID);
-                return RedirectToAction("Index", "Home", new { area = "Home" });
+                return RedirectToAction("Map", "Map");
             }
         }
 
