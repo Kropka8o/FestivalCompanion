@@ -9,16 +9,14 @@ namespace FestivalCompanion.Controllers
     public class AccountController : Controller
     {
         private readonly PasswordHasher _hasher;
-        private readonly BloodhoundContextDB _db; // Jouw database context
+        private readonly BloodhoundContextDB _db; 
 
-        // Injecteer de PasswordHasher en de DbContext in de constructor
         public AccountController(BloodhoundContextDB db, PasswordHasher hasher)
         {
             _db = db;
             _hasher = hasher;
         }
 
-        // GET: AccountController/Login
         public IActionResult Login()
         {
             return View();
@@ -31,19 +29,15 @@ namespace FestivalCompanion.Controllers
                 .Where(g => g.Email == accountLoginModel.Email)
                 .FirstOrDefault();
 
-            // 3. Verificatie van de hash:
             // Check: 1) Bestaat de gebruiker? OF 2) Klopt het wachtwoord?
             if (user == null || !_hasher.VerifyPassword(accountLoginModel.Password, user.Wachtwoord))
             {
-                // Veilige foutmelding
                 TempData["Error"] = "Inloggegevens zijn niet correct.";
                 return View(accountLoginModel);
             } else
             {
-
-
                 HttpContext.Session.SetInt32("UserID", user.Gebruiker_ID);
-            return RedirectToAction("Index", "Home", new { area = "Home" });
+                return RedirectToAction("Index", "Home", new { area = "Home" });
             }
         }
 
@@ -53,38 +47,31 @@ namespace FestivalCompanion.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: AccountController/Login
         public IActionResult Register()
         {
             return View();
         }
 
-        // POST: Registratie Logica (Wachtwoord HASHSEN)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Register(AccountRegisterViewModel accountRegisterModel)
         {
-            // 1. Validatie (Inputvalidatie check)
             if (!ModelState.IsValid)
             {
                 return View(accountRegisterModel);
             } else
             {
+                var newUser = new User
+                {
+                    Naam = accountRegisterModel.Name,
+                    Email = accountRegisterModel.Email,
+                    Leeftijd = accountRegisterModel.DateOfBirth,
+                    Wachtwoord = _hasher.HashPassword(accountRegisterModel.Password)
+                };
 
-
-            // 2. HASHSEN: Roep de Argon2id methode aans
-            var newUser = new User
-            {
-                Naam = accountRegisterModel.Name,
-                Email = accountRegisterModel.Email,
-                Leeftijd = accountRegisterModel.DateOfBirth, // Let op: model.DateOfBirth moet overeenkomen met de input
-                Wachtwoord = _hasher.HashPassword(accountRegisterModel.Password) // <-- HASHSEN
-            };
-
-            // 3. Database opslag
-            _db.Gebruiker.Add(newUser);
-            _db.SaveChanges();
-            return RedirectToAction("Login");
+                _db.Gebruiker.Add(newUser);
+                _db.SaveChanges();
+                return RedirectToAction("Login");
             }
         }
     }
