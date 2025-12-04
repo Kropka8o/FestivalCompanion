@@ -6,7 +6,7 @@
         public int Zone_ID { get; set; }
         public Zone Zone { get; set; }
         public string Naam {  get; set; }
-        public string Type { get; set; } // Could be an enum in the future
+        public string Type { get; set; }
         public decimal Lengtegraad {  get; set; }
         public decimal Breedtegraad { get; set; }
 

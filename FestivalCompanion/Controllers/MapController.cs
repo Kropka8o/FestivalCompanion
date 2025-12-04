@@ -9,9 +9,17 @@ namespace FestivalCompanion.Controllers
         // GET: MapController
         public ActionResult Map()
         {
-            BloodhoundContextDB bloodhoundContext = new BloodhoundContextDB();
-            var data = bloodhoundContext.Locatie.Include(l => l.Zone);
-            return View(data);
+            var userID = HttpContext.Session.GetInt32("UserID") ?? null;
+            if (userID == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+                BloodhoundContextDB bloodhoundContext = new BloodhoundContextDB();
+                var data = bloodhoundContext.Locatie.Include(l => l.Zone);
+                return View(data);
+            }
         }
 
         // GET: MapController/Details/5

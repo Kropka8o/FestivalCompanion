@@ -26,14 +26,10 @@
 				<input asp-for="Password" type="password" placeholder="Wachtwoord" />
 			</div>
 			<div class="form-group">
-				<input asp-for="ConfirmPassword" type="password" placeholder="Herhaal Wachtwoord" />
-			</div>
-			<div class="form-group">
 				<button type="submit">Registreren</button>
 			</div>
 		</form>
-
-		@* Kan er hier een redirect naar login komen? *@
-
+		<p>Heb je al een account?</p>
+		<a class="inlogBtn" asp-area="" asp-controller="Account" asp-action="Login">Inloggen</a>
 	</div>
 </main>

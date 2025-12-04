@@ -1,10 +1,9 @@
 ﻿using Isopoh.Cryptography.Argon2;
 using System.Text;
-using System.Security.Cryptography; // Voor de Salt generator
+using System.Security.Cryptography;
 
-namespace FestivalCompanion.Models // <-- Zorg dat dit de juiste namespace is
+namespace FestivalCompanion.Models
 {
-    // De juiste naam van de klasse
     public class PasswordHasher
     {
         private readonly Argon2Config _configDefaults;
@@ -13,7 +12,6 @@ namespace FestivalCompanion.Models // <-- Zorg dat dit de juiste namespace is
         {
             _configDefaults = new Argon2Config
             {
-                // FIX: Gebruik de juiste enumwaarde voor Argon2Type
                 Type = Argon2Type.HybridAddressing,
                 Version = Argon2Version.Nineteen,
                 HashLength = 32,                    // 256-bit output hash
@@ -27,7 +25,6 @@ namespace FestivalCompanion.Models // <-- Zorg dat dit de juiste namespace is
 
         public string HashPassword(string password)
         {
-            // FIX: Gebruik een object-initializer om de waarden van de defaults over te nemen
             var config = new Argon2Config
             {
                 Type = _configDefaults.Type,
@@ -38,10 +35,9 @@ namespace FestivalCompanion.Models // <-- Zorg dat dit de juiste namespace is
                 Lanes = _configDefaults.Lanes,
 
                 Password = Encoding.UTF8.GetBytes(password),
-                // FIX: Maak een cryptografisch veilige salt (GenSalt is verwijderd/veranderd in v2.0.0)
                 Salt = new byte[16]
             };
-            RandomNumberGenerator.Fill(config.Salt); // Vul de salt met veilige willekeurige bytes
+            RandomNumberGenerator.Fill(config.Salt);
 
             return Argon2.Hash(config);
         }
