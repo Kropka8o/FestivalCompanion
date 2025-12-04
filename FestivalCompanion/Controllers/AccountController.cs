@@ -1,7 +1,5 @@
 ﻿using FestivalCompanion.Data;
 using FestivalCompanion.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -40,26 +38,19 @@ namespace FestivalCompanion.Controllers
                 // Veilige foutmelding
                 TempData["Error"] = "Inloggegevens zijn niet correct.";
                 return View(accountLoginModel);
-            }
+            } else
+            {
 
-            // 4. Succes: Authentication Ticket toevoegen (Hier voeg je de inlogsessie toe)
-            // ... (Jouw code voor het inloggen van de gebruiker) ...
 
-            HttpContext.Session.SetInt32("UserID", user.Gebruiker_ID);
+                HttpContext.Session.SetInt32("UserID", user.Gebruiker_ID);
             return RedirectToAction("Index", "Home", new { area = "Home" });
-            ;
+            }
         }
 
-        public async Task<ActionResult> Logout()
+        public ActionResult Logout()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
-        }
-
-        // GET: AccountController/Register
-        public IActionResult Register()
-        {
-            return View(); // Laadt de Register View
         }
 
         // POST: Registratie Logica (Wachtwoord HASHSEN)
@@ -71,7 +62,9 @@ namespace FestivalCompanion.Controllers
             if (!ModelState.IsValid)
             {
                 return View(accountRegisterModel);
-            }
+            } else
+            {
+
 
             // 2. HASHSEN: Roep de Argon2id methode aans
             var newUser = new User
@@ -86,6 +79,7 @@ namespace FestivalCompanion.Controllers
             _db.Gebruiker.Add(newUser);
             _db.SaveChanges();
             return RedirectToAction("Login");
+            }
         }
     }
 }

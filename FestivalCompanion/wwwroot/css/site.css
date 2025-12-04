@@ -71,9 +71,10 @@ button, .accountBtns a {
 }
 
 #myVideo {
-    z-index: -1;
+  z-index: -1;
+  opacity: 0.75;
   position: fixed;
-  right: 0;
+  right: 0px;
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
@@ -97,8 +98,10 @@ button, .accountBtns a {
 }
 
 #keuzescherm, .authscherm {
+    z-index: 1;
     height: 100%;
     overflow-y: hidden;
+    /*Laat dit staan, dit gaat gebruikt worden in mijn A/B testing*/
 /*    background-image: url(/img/keuzeschermbg.jpg);
     background-position: top left;
     background-size: cover;*/

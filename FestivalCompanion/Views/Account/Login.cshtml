@@ -5,13 +5,16 @@
 
 <main class="authscherm">
 	<div class="wrapper">
+		<video autoplay muted loop id="myVideo">
+			<source src="/img/keuzeschermbgVideo.mp4" type="video/mp4">
+		</video>
 		<figure class="grootLogo">
 			<img src="/img/bloodhoundlogowit.png" alt="Bloodhound Logo Wit" />
 		</figure>
 
 		<form method="post" asp-action="Login" class="loginForm">
 			<div class="form-group">
-				<input asp-for="Email" type="email" placeholder="Gebruikersnaam" />
+				<input asp-for="Email" type="email" placeholder="Email" />
 			</div>
 			<div class="form-group">
 				<input asp-for="Password" type="password" placeholder="Wachtwoord" />
