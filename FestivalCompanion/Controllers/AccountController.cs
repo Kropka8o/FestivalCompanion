@@ -79,7 +79,7 @@ namespace FestivalCompanion.Controllers
                 Naam = accountRegisterModel.Name,
                 Email = accountRegisterModel.Email,
                 Leeftijd = accountRegisterModel.DateOfBirth, // Let op: model.DateOfBirth moet overeenkomen met de input
-                WachtwoordHash = _hasher.HashPassword(accountRegisterModel.Password) // <-- HASHSEN
+                Wachtwoord = _hasher.HashPassword(accountRegisterModel.Password) // <-- HASHSEN
             };
 
             // 3. Database opslag
