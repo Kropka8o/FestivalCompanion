@@ -12,7 +12,6 @@ namespace FestivalCompanion.Models
         {
             _configDefaults = new Argon2Config
             {
-                // FIX: Gebruik de juiste enumwaarde voor Argon2Type
                 Type = Argon2Type.HybridAddressing,
                 Version = Argon2Version.Nineteen,
                 HashLength = 32,                    // 256-bit output hash
@@ -26,7 +25,6 @@ namespace FestivalCompanion.Models
 
         public string HashPassword(string password)
         {
-            // FIX: Gebruik een object-initializer om de waarden van de defaults over te nemen
             var config = new Argon2Config
             {
                 Type = _configDefaults.Type,
@@ -37,10 +35,9 @@ namespace FestivalCompanion.Models
                 Lanes = _configDefaults.Lanes,
 
                 Password = Encoding.UTF8.GetBytes(password),
-                // FIX: Maak een cryptografisch veilige salt (GenSalt is verwijderd/veranderd in v2.0.0)
                 Salt = new byte[16]
             };
-            RandomNumberGenerator.Fill(config.Salt); // Vul de salt met veilige willekeurige bytes
+            RandomNumberGenerator.Fill(config.Salt);
 
             return Argon2.Hash(config);
         }
