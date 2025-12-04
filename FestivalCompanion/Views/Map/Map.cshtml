@@ -19,19 +19,16 @@
         $(function () {
             var map = L.map('map').setView([51.53553000, 5.07792000], 16);
 
-
-
-
 			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				attribution: '&copy; OpenStreetMap contributors',
 				maxZoom: 19
 			}).addTo(map);
 			
-			var podiumIcon = L.icon({ iconUrl: '/img/podiumIcon.png', iconSize: [20,20] });
-			var eettentIcon = L.icon({ iconUrl: '/img/eettentIcon.png', iconSize: [20,20] });
-			var bierkraamIcon = L.icon({ iconUrl: '/img/bierkraamIcon.png', iconSize: [20,20] });
-			var toiletIcon   = L.icon({ iconUrl: '/img/toiletIcon.png', iconSize: [20,20] });
-			var standaardIcon = L.icon({ iconUrl: '/img/podiumIcon.png', iconSize: [20,20] });
+			var podiumIcon = L.icon({ iconUrl: '/img/podiumIcon.png', iconSize: [70,85] });
+			var eettentIcon = L.icon({ iconUrl: '/img/eettentIcon.png', iconSize: [70,70] });
+			var bierkraamIcon = L.icon({ iconUrl: '/img/bierkraamIcon.png', iconSize: [70,70] });
+			var toiletIcon   = L.icon({ iconUrl: '/img/toiletIcon.png', iconSize: [70,70] });
+			var standaardIcon = L.icon({ iconUrl: '/img/podiumIcon.png', iconSize: [70,70] });
 
 
 			// example marker
