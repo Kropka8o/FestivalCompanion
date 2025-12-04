@@ -1,10 +1,9 @@
 ﻿using Isopoh.Cryptography.Argon2;
 using System.Text;
-using System.Security.Cryptography; // Voor de Salt generator
+using System.Security.Cryptography;
 
-namespace FestivalCompanion.Models // <-- Zorg dat dit de juiste namespace is
+namespace FestivalCompanion.Models
 {
-    // De juiste naam van de klasse
     public class PasswordHasher
     {
         private readonly Argon2Config _configDefaults;

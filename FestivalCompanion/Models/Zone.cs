@@ -6,7 +6,7 @@
         public string Naam { get; set; }
         public decimal Lengtegraad { get; set; }
         public decimal Breedtegraad { get; set; }
-        public string Grootte { get; set; } // Could be an enum in the future
+        public string Grootte { get; set; }
         public List<Location> Locatie { get; set; }
 
     }

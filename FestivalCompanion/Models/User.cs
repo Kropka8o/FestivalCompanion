@@ -7,7 +7,5 @@
         public string Email { get; set; }
         public DateOnly Leeftijd { get; set; }
         public required string Wachtwoord { get; set; }
-
-        // DIT IS DE HASH: Zorgt dat er nooit een plaintext wachtwoord in de database staat
     }
 }

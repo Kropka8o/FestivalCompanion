@@ -29,7 +29,6 @@ namespace FestivalCompanion.Controllers
                 .Where(g => g.Email == accountLoginModel.Email)
                 .FirstOrDefault();
 
-            // Check: 1) Bestaat de gebruiker? OF 2) Klopt het wachtwoord?
             if (user == null || !_hasher.VerifyPassword(accountLoginModel.Password, user.Wachtwoord))
             {
                 TempData["Error"] = "Inloggegevens zijn niet correct.";

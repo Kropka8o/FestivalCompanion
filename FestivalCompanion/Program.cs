@@ -1,10 +1,8 @@
-// Program.cs
 using FestivalCompanion.Data;
 using FestivalCompanion.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -14,22 +12,15 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// 1. REGISTRATIE VAN JOUW SERVICES
-// Zorg dat je de juiste namespace toevoegt voor jouw DbContext
-// Voor nu gebruik ik een placeholder, pas deze aan naar de naam van jouw DbContext
-builder.Services.AddDbContext<BloodhoundContextDB>(); // <-- Jouw DbContext moet hier staan
+builder.Services.AddDbContext<BloodhoundContextDB>();
 
-// Registreer de PasswordHasher zodat deze in andere klassen geïnjecteerd kan worden
 builder.Services.AddSingleton<FestivalCompanion.Models.PasswordHasher>();
 
-// 2. BUILD APP
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
