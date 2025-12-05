@@ -6,11 +6,11 @@
 	var locations = new List<FestivalCompanion.Models.Location>();
 }
 
-
 @await foreach (var location in Model)
 {
 	locations.Add(location);
 }
+
 
 <div id="map" style="height:100vh; width:100vw;"></div>
 
@@ -25,14 +25,11 @@
 			}).addTo(map);
 			
 			var podiumIcon = L.icon({ iconUrl: '/img/podiumIcon.png', iconSize: [70,85] });
-			var eettentIcon = L.icon({ iconUrl: '/img/eettentIcon.png', iconSize: [70,70] });
-			var bierkraamIcon = L.icon({ iconUrl: '/img/bierkraamIcon.png', iconSize: [70,70] });
-			var toiletIcon   = L.icon({ iconUrl: '/img/toiletIcon.png', iconSize: [70,70] });
-			var standaardIcon = L.icon({ iconUrl: '/img/podiumIcon.png', iconSize: [70,70] });
+			var eettentIcon = L.icon({ iconUrl: '/img/eettentIcon.png', iconSize: [70,85] });
+			var bierkraamIcon = L.icon({ iconUrl: '/img/bierkraam.png', iconSize: [70,85] });
+			var toiletIcon   = L.icon({ iconUrl: '/img/toiletIcon.png', iconSize: [70,85] });
+			var standaardIcon = L.icon({ iconUrl: '/img/toiletIcon.png', iconSize: [70,85] });
 
-
-			// example marker
-			L.marker([51.53495000, 5.07737000]).addTo(map).bindPopup('Hello Festival!').openPopup();
 
 			var markers = @Html.Raw(JsonSerializer.Serialize(
 				locations.Select(l => new
@@ -47,18 +44,18 @@
 			markers.forEach(function (m) {
 				var iconToUse;
 
-				switch(m.type){
-					case "Podium":
+				switch(m.type.trim().toLowerCase()){
+					case "podium":
 						iconToUse = podiumIcon;
 						break;
-					case "Eettent":
-						iconToUse = eettentIcon;
-						break;
-					case "Bierkraam":
+					case "bierkraam":
 						iconToUse = bierkraamIcon;
 						break;
-					case "Toilet":
+					case "toilet":
 						iconToUse = toiletIcon;
+						break;
+					case "eettent":
+						iconToUse = eettentIcon;
 						break;
 					default:
 						iconToUse = standaardIcon;
