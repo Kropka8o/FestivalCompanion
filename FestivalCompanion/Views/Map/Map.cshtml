@@ -11,24 +11,63 @@
 	locations.Add(location);
 }
 
+<main class="mapscherm">
+	<div class="wrapper">
+		<figure class="beeldmerk">
+			<img src="~/img/bloodhoundbeeldmerkpaars.png" alt="Bloodhound Beeldmerk Paars" />
+		</figure>
 
-<div id="map" style="height:100vh; width:100vw;"></div>
+		<header>
+			<h2 class="welkombericht">Hallo gebruiker!</h2>
+			<a><i class="fa-solid fa-right-from-bracket"></i></a>
+		</header>
+
+		<section class="mapContainer">
+			<div id="map"></div>
+		</section>
+
+		<section class="legenda">
+			<article class="legendaLinks">
+				<figure class="legendaItem">
+					<img src="~/img/bierkraam.png" alt="Bierkraam icon legenda" />
+					<figcaption class="">Bierkraam</figcaption>
+				</figure>
+				<figure class="legendaItem">
+					<img src="~/img/eettentIcon.png" alt="Eettent icon legenda" />
+					<figcaption class="">Foodstand</figcaption>
+				</figure>
+			</article>
+
+			<article class="legendaRechts">
+				<figure class="legendaItem">
+					<img src="~/img/podiumIcon.png" alt="Podium icon legenda" />
+					<figcaption class="">Podium</figcaption>
+				</figure>
+				<figure class="legendaItem">
+					<img src="~/img/toiletIcon.png" alt="Toilet icon legenda" />
+					<figcaption class="">Toilet</figcaption>
+				</figure>
+			</article>
+		</section>
+	</div>
+</main>
+
 
 @section Scripts {
-    <script>
-        $(function () {
-            var map = L.map('map').setView([51.53553000, 5.07792000], 16);
+	<script>
+		$(function () {
+			var map = L.map('map').setView([51.53553000, 5.07792000], 16);
 
 			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				attribution: '&copy; OpenStreetMap contributors',
 				maxZoom: 19
 			}).addTo(map);
-			
-			var podiumIcon = L.icon({ iconUrl: '/img/podiumIcon.png', iconSize: [70,85] });
-			var eettentIcon = L.icon({ iconUrl: '/img/eettentIcon.png', iconSize: [70,85] });
-			var bierkraamIcon = L.icon({ iconUrl: '/img/bierkraam.png', iconSize: [70,85] });
-			var toiletIcon   = L.icon({ iconUrl: '/img/toiletIcon.png', iconSize: [70,85] });
-			var standaardIcon = L.icon({ iconUrl: '/img/toiletIcon.png', iconSize: [70,85] });
+
+			var podiumIcon = L.icon({ iconUrl: '/img/podiumIcon.png', iconSize: [55,65] });
+			var eettentIcon = L.icon({ iconUrl: '/img/eettentIcon.png', iconSize: [55,65] });
+			var bierkraamIcon = L.icon({ iconUrl: '/img/bierkraam.png', iconSize: [55,65] });
+			var toiletIcon   = L.icon({ iconUrl: '/img/toiletIcon.png', iconSize: [55,65] });
+			var standaardIcon = L.icon({ iconUrl: '/img/toiletIcon.png', iconSize: [55,65] });
 
 
 			var markers = @Html.Raw(JsonSerializer.Serialize(
@@ -63,7 +102,7 @@
 
 				L.marker([m.longitude, m.latitude], {icon: iconToUse})
 				.addTo(map)
-				.bindPopup(m.popup).openPopup();
+				.bindPopup(m.popup);
 			});
 
 			setTimeout(function () { map.invalidateSize(); }, 200);
