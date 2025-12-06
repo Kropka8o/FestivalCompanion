@@ -57,18 +57,18 @@
 @section Scripts {
 	<script>
 		$(function () {
-			var map = L.map('map').setView([51.53553000, 5.07792000], 16);
+			var map = L.map('map').setView([51.53553000, 5.07792000], 18);
 
 			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				attribution: '&copy; OpenStreetMap contributors',
 				maxZoom: 19
 			}).addTo(map);
 
-			var podiumIcon = L.icon({ iconUrl: '/img/podiumIcon.png', iconSize: [55,65] });
-			var eettentIcon = L.icon({ iconUrl: '/img/eettentIcon.png', iconSize: [55,65] });
-			var bierkraamIcon = L.icon({ iconUrl: '/img/bierkraam.png', iconSize: [55,65] });
-			var toiletIcon   = L.icon({ iconUrl: '/img/toiletIcon.png', iconSize: [55,65] });
-			var standaardIcon = L.icon({ iconUrl: '/img/toiletIcon.png', iconSize: [55,65] });
+			var podiumIcon = L.icon({ iconUrl: '/img/podiumIconV2.png', iconSize: [55,65] });
+			var eettentIcon = L.icon({ iconUrl: '/img/eettentIconV2.png', iconSize: [55,65] });
+			var bierkraamIcon = L.icon({ iconUrl: '/img/bierkraamV2.png', iconSize: [55,65] });
+			var toiletIcon   = L.icon({ iconUrl: '/img/toiletIconV2.png', iconSize: [55,65] });
+			var standaardIcon = L.icon({ iconUrl: '/img/toiletIconV2.png', iconSize: [55,65] });
 
 
 			var markers = @Html.Raw(JsonSerializer.Serialize(

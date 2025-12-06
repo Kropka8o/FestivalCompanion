@@ -22,7 +22,7 @@ namespace FestivalCompanion.Controllers
             }
         }
 
-        // GET: MapController/Details/5
+        //GET: MapController/Details/5
         public ActionResult Details(int id)
         {
             return View();
