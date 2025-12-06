@@ -151,6 +151,10 @@ button, .accountBtns a {
     color: var(--wit);
 }
 
+.uitLogBtn {
+    color: var(--wit);
+}
+
 .authscherm form {
     display: flex;
     flex-direction: column;

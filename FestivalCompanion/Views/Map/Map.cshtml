@@ -2,7 +2,8 @@
 @using System.Text.Json
 
 @{
-	ViewData["Title"] = "Map";
+	ViewData["Title"] = "Kaart";
+	var username = Context.Session.GetString("Username") ?? null;
 	var locations = new List<FestivalCompanion.Models.Location>();
 }
 
@@ -18,8 +19,8 @@
 		</figure>
 
 		<header>
-			<h2 class="welkombericht">Hallo gebruiker!</h2>
-			<a><i class="fa-solid fa-right-from-bracket"></i></a>
+			<h2 class="welkombericht">Hallo @username !</h2>
+			<a asp-area="" asp-controller="Account" asp-action="Logout"><i class="fa-solid fa-right-from-bracket uitLogBtn"></i></a>
 		</header>
 
 		<section class="mapContainer">

@@ -36,6 +36,7 @@ namespace FestivalCompanion.Controllers
             } else
             {
                 HttpContext.Session.SetInt32("UserID", user.Gebruiker_ID);
+                HttpContext.Session.SetString("Username", user.Naam);
                 return RedirectToAction("Map", "Map");
             }
         }
